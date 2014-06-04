@@ -1,0 +1,218 @@
+package com.rongwei.platform.comapi.json;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class JsonHelper {
+	public static final byte GETVALUEMODE_GETMETHOD=12;
+	public static final byte GETVALUEMODE_FIELD=13;
+	
+	/**
+	 * 将JavaBean转换成JSONObject (通过Map中转)
+	 * @param bean javaBean
+	 * @param getValueMode
+	 * @return
+	 */
+	public static JSONObject toJSON(Object bean) {
+		return new JSONObject(toMap(bean));
+	}
+	
+	/**
+	 * 将JavaBean转换成JSONArray (通过Map中转)
+	 * @param bean
+	 * @param getValueMode
+	 * @return
+	 */
+	public static <T> JSONArray toJson(Collection<T> bean){
+		JSONArray jsonArr=new JSONArray();
+		Iterator<T> iter=bean.iterator();
+		while(iter.hasNext()){
+			jsonArr.put(toJSON(iter.next()));
+		}
+		return jsonArr; 
+	}
+
+	/**
+	 * 将JSONObject对象字符串转换为JavaBean
+	 * @param jsonString JSONObject表示的json字符串
+	 * @param clazz javaBean的class对象
+	 * @return clazz表示的javaBean
+	 */
+	public static <T> T fromJson(String jsonString, Class<T> clazz) {
+		T javabean=null;
+		String jsonStr=null;
+		JSONObject jsonObject;
+		Map map =null;
+		try {
+			jsonObject = new JSONObject(jsonString);
+			jsonStr=jsonObject.toString();
+			map = toMap(jsonStr);
+			javabean=toJavaBean(clazz, map);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return javabean;
+	}
+	
+	/**
+	 * 将JSONArray对象字符串转换为Collection<JavaBean>
+	 * @param jsonString JSONArray表示的json字符串
+	 * @param clazz Collection<JavaBean>表示的class对象
+	 * @return clazz表示的Collection<JavaBean>
+	 */
+	/*public static <T> Collection<T> fromJsonArr(String jsonString, Class<? extends Collection> clazz, Class<T> clazz2){
+		Collection<T> coll=null;
+		try {
+			coll=clazz.newInstance();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		Map map =null;
+//		Object obj1=clazz.getGenericSuperclass();
+//		Object obj2=(ParameterizedType)clazz.getGenericSuperclass();
+//		Type obj3=((ParameterizedType)clazz.getGenericSuperclass()).getActualTypeArguments()[0];
+//		Class<? extends Type> c=obj3.getClass();
+//		Class<T> cla=(Class<T>) ((ParameterizedType)clazz.getGenericSuperclass()).getActualTypeArguments()[0]; //获得T的class对象
+		try {
+			JSONArray jsonArr = new JSONArray(jsonString);
+			JSONObject jsonObject;
+			for(int i=0;i<jsonArr.length();i++){
+				jsonObject=jsonArr.getJSONObject(i);
+				map=toMap(jsonObject.toString());
+				coll.add((T) toJavaBean(clazz2, map));
+			}
+		} catch (JSONException e1) {
+			e1.printStackTrace();
+		}
+		return coll;
+	}*/
+	
+	/**
+	 * 将Javabean转换为Map
+	 * @param javaBean javaBean
+	 * @return Map对象
+	 */
+	public static Map<String, Object> toMap(Object javaBean) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		Method[] methods = javaBean.getClass().getDeclaredMethods();
+		String fieldName = null;
+		Object fieldValue = null;
+		if(methods.length!=0){
+			//使用get方法取值
+			try {
+				for (Method method : methods) {
+					if (method.getName().startsWith("get")) {
+						fieldName = method.getName();
+						fieldName = fieldName.substring(fieldName.indexOf("get") + 3);
+						fieldName = fieldName.toLowerCase().charAt(0) + fieldName.substring(1);
+						fieldValue = method.invoke(javaBean, (Object[]) null);
+						result.put(fieldName, fieldValue);
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			//使用字段取值
+			Field[] fields=javaBean.getClass().getDeclaredFields();
+			try {
+				for(Field field:fields){
+					field.setAccessible(true);
+					fieldName=field.getName();
+					fieldValue=field.get(javaBean);
+					result.put(fieldName, fieldValue);
+				}
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 将Json对象转换成Map
+	 * @param jsonObject json对象
+	 * @return Map对象
+	 * @throws JSONException
+	 */
+	public static Map toMap(String jsonString) throws JSONException {
+		JSONObject jsonObject = new JSONObject(jsonString);
+		Map result = new HashMap();
+		Iterator iterator = jsonObject.keys();
+		String key = null;
+		Object value = null;
+		while (iterator.hasNext()) {
+			key = (String) iterator.next();
+			value = jsonObject.get(key);
+			result.put(key, value);
+		}
+		return result;
+	}
+	
+	/**
+	 * 将Map转换成Javabean
+	 * @param clazz javaBean的class对象
+	 * @param data Map数据
+	 * @return clazz表示的对象
+	 */
+	public static <T> T toJavaBean(Class<T> clazz, Map data) {
+		T javaBean=null;
+		try {
+			javaBean = clazz.newInstance();
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+		}
+		Method[] methods = clazz.getDeclaredMethods();
+		String fieldName =null;
+		Object fieldValue=null;
+		if(methods.length!=0){
+			//使用set方法注射值
+			try {
+				for (Method method : methods) {
+					if (method.getName().startsWith("set")) {
+						fieldName = method.getName();
+						fieldName = fieldName.substring(fieldName.indexOf("set") + 3);
+						fieldName = fieldName.toLowerCase().charAt(0) + fieldName.substring(1);
+						Class c=method.getReturnType();
+						method.invoke(javaBean, new Object[] { c.cast(data.get(fieldName)) });
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			//使用Field注射值
+			Field[] fields=clazz.getDeclaredFields();
+			try {
+				for(Field field : fields){
+					fieldName=field.getName();
+					field.setAccessible(true);
+					fieldValue=data.get(fieldName);
+					Class c=fieldValue.getClass();
+					boolean b=c.isInstance(field.getType());
+					field.set(javaBean, fieldValue);
+				}
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		return javaBean;
+	}
+
+}

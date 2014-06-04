@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<users>
+	<user id="123">
+	    <name>mz</name>
+	    <age>24</age>
+	    <birthday>1999-9-9</birthday>
+	    <height>170</height>
+	    <gender>男</gender>
+	    <address></address>
+	    <IDNum>432524</IDNum>
+	</user>    
+	<user id="124">
+	    <name>xf</name>
+	    <age>22</age>
+	    <birthday>1991-1-1</birthday>
+	    <height>165</height>
+	    <gender>女</gender>
+	    <address></address>
+	    <IDNum></IDNum>
+	</user>   
+</users>

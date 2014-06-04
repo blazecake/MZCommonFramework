@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/FL_MobileCustomSystem/!svn/ver/1490/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient
+END
+HttpFilesUpload.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/FL_MobileCustomSystem/!svn/ver/1407/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient/HttpFilesUpload.java
+END
+CustomHttpPost.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/FL_MobileCustomSystem/!svn/ver/1365/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient/CustomHttpPost.java
+END
+CustomHttpGet.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/FL_MobileCustomSystem/!svn/ver/1361/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient/CustomHttpGet.java
+END
+CustomHttpResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/FL_MobileCustomSystem/!svn/ver/1445/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient/CustomHttpResponse.java
+END
+CustomHttpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/FL_MobileCustomSystem/!svn/ver/1490/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient/CustomHttpClient.java
+END
+CustomHttpConstant.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/FL_MobileCustomSystem/!svn/ver/1365/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/httpclient/CustomHttpConstant.java
+END

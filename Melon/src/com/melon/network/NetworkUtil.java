@@ -1,0 +1,59 @@
+package com.melon.network;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+/**
+ * @Description: 网络工具类
+ * @author maozhou
+ * @date 2013-10-10 下午9:10:46
+ */
+public class NetworkUtil {
+	/**
+	 * 无网络
+	 */
+	public final static int NO_NETWORK=-1;
+	
+	/**
+	 * wifi网络
+	 */
+	public final static int WIFI = 1;
+	
+	/**
+	 * wap网络
+	 */
+	public final static int CMWAP = 2;
+	
+	/**
+	 * net网络
+	 */
+	public final static int CMNET = 3;
+	
+	/**
+	 * 获取当前的网络状态 
+	 * @param context
+	 * @return -1：没有网络  1：WIFI网络2：wap网络3：net网络
+	 */
+	public static int getAPNType(Context context) {
+		int netType = NO_NETWORK;
+		ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+		if (networkInfo == null) {
+			return netType;
+		}
+		int nType = networkInfo.getType();
+
+		if (nType == ConnectivityManager.TYPE_MOBILE) {
+			if (networkInfo.getExtraInfo().toLowerCase().equals("cmnet")) {
+				netType = CMNET;
+			} else {
+				netType = CMWAP;
+			}
+		} else if (nType == ConnectivityManager.TYPE_WIFI) {
+			netType = WIFI;
+		}
+		return netType;
+	}
+	
+}

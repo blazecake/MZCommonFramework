@@ -1,0 +1,52 @@
+8
+
+dir
+1548
+https://192.168.0.104/svn/FL_MobileCustomSystem/trunk/RongweiCommonApi/src/com/rongwei/platform/comapi/xml
+https://192.168.0.104/svn/FL_MobileCustomSystem
+
+
+
+2013-10-28T07:34:05.859375Z
+1488
+maozhou
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+a1598f32-79b0-5743-92d2-6df2ea135ba5
+
+CustomPullParser.java
+file
+
+
+
+
+2013-11-29T03:22:19.161000Z
+9644b5aae7ab7e822c684cbf6e0e7ba0
+2013-10-28T07:34:05.859375Z
+1488
+maozhou
+
+CustomSaxParser.java
+file
+
+
+
+
+2013-11-29T03:22:19.145000Z
+fad34510ba3a004df00152c5fe292d32
+2013-10-25T11:20:46.000000Z
+1486
+maozhou
+
