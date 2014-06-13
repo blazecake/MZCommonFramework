@@ -1,3 +1,4 @@
+android http请求，json解析。
 通过http/https协议请求网络返回json是android最常用、最基本的功能，因此对此功能进行封装。
 接口简单而又轻便，最大的特点有：
 1、使用简单；
