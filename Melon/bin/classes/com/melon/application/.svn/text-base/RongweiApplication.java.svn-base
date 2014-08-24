@@ -1,9 +1,0 @@
-package com.rongwei.platform.comapi.application;
-
-import android.app.Application;
-
-public class RongweiApplication extends Application {
-	
-	public static String folderName="Test"; //本地存储文件夹名
-	
-}

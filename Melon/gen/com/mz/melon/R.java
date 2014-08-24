@@ -17,28 +17,28 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f030000;
-        public static final int activity_vertical_margin=0x7f030001;
+        public static int activity_horizontal_margin=0x7f030000;
+        public static int activity_vertical_margin=0x7f030001;
     }
     public static final class drawable {
-        public static final int custom_loc=0x7f020000;
-        public static final int ic_3d_map=0x7f020001;
-        public static final int ic_common_map=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int ic_satellite_map=0x7f020004;
-        public static final int ic_traffic_map=0x7f020005;
-        public static final int icon_geo=0x7f020006;
+        public static int custom_loc=0x7f020000;
+        public static int ic_3d_map=0x7f020001;
+        public static int ic_common_map=0x7f020002;
+        public static int ic_launcher=0x7f020003;
+        public static int ic_satellite_map=0x7f020004;
+        public static int ic_traffic_map=0x7f020005;
+        public static int icon_geo=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f070000;
+        public static int action_settings=0x7f070000;
     }
     public static final class menu {
-        public static final int main_actvity=0x7f060000;
+        public static int main_actvity=0x7f060000;
     }
     public static final class string {
-        public static final int action_settings=0x7f040001;
-        public static final int app_name=0x7f040000;
-        public static final int hello_world=0x7f040002;
+        public static int action_settings=0x7f040001;
+        public static int app_name=0x7f040000;
+        public static int hello_world=0x7f040002;
     }
     public static final class style {
         /** 
@@ -55,17 +55,11 @@ public final class R {
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
  API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static int AppBaseTheme=0x7f050000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static int AppTheme=0x7f050001;
     }
 }
