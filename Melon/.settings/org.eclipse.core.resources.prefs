@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/com/melon/application/A.java=GBK
+encoding//src/com/melon/comapi/json/GsonUtil.java=GBK
+encoding//src/com/melon/comapi/json/JsonHelper.java=GBK
+encoding//src/com/melon/httpclient/HttpFilesUpload.java=GBK
+encoding//src/com/melon/util/DeviceUtil.java=GBK
